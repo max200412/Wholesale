@@ -1,1 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Premium garment shop for retail and wholesale. Latest fashion for men, women & kids. Bulk orders with best price.">
+  <meta name="keywords" content="garments, fashion retail, wholesale clothing, mens wear, womens wear, kids collection">
+  <meta name="author" content="StyleWeave">
+  <title>StyleWeave | Premium Garments Retail & Wholesale</title>
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Google Fonts (Elegant typography) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    /* Root Variables */
+    :root {
+      --gold: #c6a45c;
+      --gold-light: #dbb87c;
+      --gold-dark: #a88947;
+      --dark-blue: #0a1a2b;
+      --dark-blue-light: #1a2a3b;
+      --black: #1e1e1e;
+      --white: #ffffff;
+      --gray-light: #f8f9fa;
+      --shadow-sm: 0 5px 15px rgba(0,0,0,0.05);
+      --shadow-md: 0 10px 25px rgba(0,0,0,0.1);
+      --shadow-lg: 0 15px 35px rgba(0,0,0,0.15);
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
 
+    /* Global Styles */
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: var(--white);
+      overflow-x: hidden;
+      padding-top: 76px; /* For fixed navbar */
+    }
+
+    h1, h2, h3, .logo-font {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    /* Custom Utility Classes */
+    .bg-gold { background-color: var(--gold) !important; }
+    .text-gold { color: var(--gold) !important; }
+    .bg-dark-blue { background-color: var(--dark-blue) !important; }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      color: var(--black);
+      border: none;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .btn-gold::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%);
+      transition: left 0.4s;
+      z-index: -1;
+    }
+    .btn-gold:hover::before { left: 0; }
+    .btn-gold:hover { color: var(--black); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    
+    .btn-outline-gold {
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+      transition: var(--transition);
+    }
+    .btn-outline-gold:hover {
+      background: var(--gold);
+      color: var(--black);
+      transform: translateY(-2px);
+    }
+
+    /* Preloader Animation */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--white);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s, visibility 0.8s;
+    }
+    .loader {
+      width: 80px;
+      height: 80px;
+      border: 5px solid var(--gray-light);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 1s infinite ease-in-out;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #preloader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Floating Buttons */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      background: #25d366;
+      color: white;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 32px;
+      line-height: 55px;
+      z-index: 100;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .whatsapp-float:hover {
+      background: #128C7E;
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--dark-blue);
+      color: var(--white);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 24px;
+      line-height: 50px;
+      z-index: 100;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+    .scroll-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .scroll-top:hover {
+      background: var(--gold);
+      color: var(--black);
+      transform: translateY(-5px);
+    }
+
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(135deg, var(--dark-blue) 0%, var(--dark-blue-light) 100%) !important;
+      padding: 1rem 0;
+      transition: var(--transition);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    .navbar.scrolled {
+      padding: 0.5rem 0;
+      background: rgba(10, 26, 43, 0.98) !important;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    }
+    .navbar-brand {
+      font-size: 2rem;
+      letter-spacing: 2px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold) 0%, #fff 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: var(--transition);
+    }
+    .navbar-brand:hover {
+      transform: scale(1.05);
+    }
+    .nav-link {
+      position: relative;
+      margin: 0 10px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9) !important;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      transition: var(--transition);
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover {
+      color: var(--gold) !important;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .navbar-toggler {
+      border: 2px solid var(--gold);
+      padding: 8px 12px;
+    }
+    .navbar-toggler:focus {
+      box-shadow: 0 0 0 3px rgba(198,164,92,0.3);
+    }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(198, 164, 92, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+      height: calc(100vh - 76px);
+      display: flex;
+      align-items: center;
+      margin-top: -76px;
+    }
+    .hero-content {
+      animation: float 3s infinite ease-in-out;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Counter Section */
+    .counter-box {
+      background: var(--white);
+      padding: 2rem 1rem;
+      border-radius: 15px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .counter-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.4s;
+    }
+    .counter-box:hover::before { height: 100%; }
+    .counter-box:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+    .counter { font-size: 3rem; font-weight: 900; color: var(--gold); line-height: 1; }
+
+    /* Category Cards */
+    .category-card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+    }
+    .category-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .category-card:hover::after { opacity: 1; }
+    .category-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: var(--shadow-lg); }
+    .category-card img { transition: transform 0.8s; height: 250px; object-fit: cover; }
+    .category-card:hover img { transform: scale(1.1); }
+    .category-card .card-body {
+      position: relative;
+      z-index: 2;
+      background: var(--white);
+    }
+
+    /* Product Cards */
+    .product-card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      height: 100%;
+    }
+    .product-card:hover {
+      transform: translateY(-15px);
+      box-shadow: var(--shadow-lg);
+    }
+    .product-image {
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+    }
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s;
+    }
+    .product-card:hover .product-image img { transform: scale(1.1); }
+    .product-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .product-card:hover .product-overlay { opacity: 1; }
+    .wholesale-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--gold);
+      color: var(--black);
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 2;
+      animation: badgePulse 2s infinite;
+    }
+    @keyframes badgePulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Filter Buttons */
+    .filter-btn {
+      margin: 0 5px 10px;
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: var(--transition);
+      border: 2px solid var(--gold);
+      color: var(--dark-blue);
+    }
+    .filter-btn.active {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+      transform: scale(1.05);
+    }
+    .filter-btn:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    /* Wholesale Banner */
+    .wholesale-banner {
+      background: linear-gradient(135deg, var(--dark-blue) 0%, #1e3a5f 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .wholesale-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(198,164,92,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    /* Testimonial Carousel */
+    .testimonial-card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: var(--shadow-sm);
+      margin: 1rem;
+      transition: var(--transition);
+    }
+    .testimonial-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+
+    /* Contact Form */
+    .form-control, .form-select {
+      border: 2px solid #eee;
+      border-radius: 10px;
+      padding: 12px;
+      transition: var(--transition);
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(198,164,92,0.2);
+    }
+
+    /* Map Container */
+    .map-container {
+      background: linear-gradient(135deg, #ddd, #eee);
+      height: 250px;
+      border-radius: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    .map-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10,26,43,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      transition: var(--transition);
+    }
+    .map-container:hover .map-overlay {
+      background: rgba(10,26,43,0.9);
+    }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(135deg, var(--dark-blue) 0%, #0a1a2b 100%);
+    }
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 5px;
+      transition: var(--transition);
+      color: var(--white);
+      text-decoration: none;
+    }
+    .social-icon:hover {
+      background: var(--gold);
+      transform: translateY(-5px) rotate(5deg);
+      color: var(--black);
+    }
+
+    /* Lightbox */
+    .lightbox-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 10000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+    .lightbox-modal img {
+      max-width: 90%;
+      max-height: 80%;
+      border: 5px solid var(--gold);
+      border-radius: 10px;
+      animation: zoomIn 0.3s;
+    }
+    @keyframes zoomIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .close-lightbox {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: var(--white);
+      font-size: 40px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .close-lightbox:hover {
+      color: var(--gold);
+      transform: rotate(90deg);
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      body { padding-top: 66px; }
+      .hero h1 { font-size: 3rem; }
+      .hero .lead { font-size: 1.2rem; }
+      .counter { font-size: 2rem; }
+      .btn-lg { padding: 0.5rem 1.5rem; font-size: 1rem; }
+      .navbar-brand { font-size: 1.5rem; }
+      .product-image { height: 200px; }
+      .nav-link { margin: 5px 0; }
+      .navbar-collapse {
+        background: linear-gradient(135deg, var(--dark-blue) 0%, var(--dark-blue-light) 100%);
+        padding: 1rem;
+        border-radius: 10px;
+        margin-top: 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      body { padding-top: 60px; }
+      .hero h1 { font-size: 2.5rem; }
+      .hero { height: calc(100vh - 60px); }
+      .counter-box { padding: 1rem; }
+      .filter-btn { padding: 5px 15px; font-size: 0.9rem; }
+      .whatsapp-float { width: 45px; height: 45px; font-size: 24px; line-height: 45px; bottom: 70px; }
+      .scroll-top { width: 40px; height: 40px; font-size: 20px; line-height: 40px; }
+    }
+
+    /* Loading Animation for Products */
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+    @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    /* Price Tag Animation */
+    .price-tag {
+      position: relative;
+      display: inline-block;
+      padding: 5px 15px;
+      background: var(--gold);
+      color: var(--black);
+      border-radius: 25px;
+      font-weight: 600;
+      transform: rotate(-2deg);
+    }
+  </style>
+</head>
+<body>
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="loader"></div>
+  </div>
+
+  <!-- STICKY NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand logo-font" href="#home">
+        <i class="fas fa-tshirt text-gold me-2"></i>StyleWeave
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#categories">Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#products">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#wholesale">Wholesale</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#testimonials">Testimonials</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+        <div class="d-flex ms-lg-3 mt-3 mt-lg-0">
+          <a href="#contact" class="btn btn-gold rounded-pill px-4">
+            <i class="fas fa-phone-alt me-2"></i>Get Quote
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="hero d-flex align-items-center">
+    <div class="container text-center text-white hero-content">
+      <h1 class="display-1 logo-font" data-aos="fade-down">StyleWeave</h1>
+      <p class="lead fs-3" data-aos="fade-up" data-aos-delay="200">Premium Fashion for Retail & Wholesale</p>
+      <div class="mt-5" data-aos="fade-up" data-aos-delay="400">
+        <a href="#products" class="btn btn-gold btn-lg rounded-pill px-5 me-3 mb-2"><i class="fas fa-shopping-bag me-2"></i>Shop Collection</a>
+        <a href="#wholesale" class="btn btn-outline-gold btn-lg rounded-pill px-5 mb-2"><i class="fas fa-tags me-2"></i>Wholesale Inquiry</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT US SECTION -->
+  <section id="about" class="py-5">
+    <div class="container py-4">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h2 class="logo-font mb-3">About StyleWeave</h2>
+          <p class="text-muted lead">With over a decade of expertise, StyleWeave delivers premium garments for both retail customers and bulk buyers. From runway trends to timeless classics, we blend quality with affordability.</p>
+          <div class="row mt-5 text-center">
+            <div class="col-4">
+              <div class="counter-box">
+                <span class="counter" data-target="10">0</span><span class="fs-3">+</span>
+                <p class="mb-0">Years Experience</p>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="counter-box">
+                <span class="counter" data-target="500">0</span><span class="fs-3">+</span>
+                <p class="mb-0">Bulk Orders</p>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="counter-box">
+                <span class="counter" data-target="30">0</span><span class="fs-3">%</span>
+                <p class="mb-0">Avg. Saving</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="about" class="img-fluid rounded-4 shadow">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES SECTION -->
+  <section id="categories" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center logo-font mb-5" data-aos="fade-down">Shop by Category</h2>
+      <div class="row g-4">
+        <div class="col-md-4 col-lg-2" data-aos="zoom-in">
+          <div class="card category-card h-100">
+            <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Men's Wear">
+            <div class="card-body text-center">
+              <h5 class="card-title">Men's Wear</h5>
+              <a href="#" class="btn btn-sm btn-outline-gold rounded-pill">View Collection</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="50">
+          <div class="card category-card h-100">
+            <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Women's Wear">
+            <div class="card-body text-center">
+              <h5 class="card-title">Women's Wear</h5>
+              <a href="#" class="btn btn-sm btn-outline-gold rounded-pill">View Collection</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card category-card h-100">
+            <img src="https://images.unsplash.com/photo-1522771930-78848d9293e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Kids Wear">
+            <div class="card-body text-center">
+              <h5 class="card-title">Kids Wear</h5>
+              <a href="#" class="btn btn-sm btn-outline-gold rounded-pill">View Collection</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="150">
+          <div class="card category-card h-100">
+            <img src="https://images.unsplash.com/photo-1601823984263-b87b59798b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Winter Collection">
+            <div class="card-body text-center">
+              <h5 class="card-title">Winter</h5>
+              <a href="#" class="btn btn-sm btn-outline-gold rounded-pill">View Collection</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card category-card h-100">
+            <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Festive Collection">
+            <div class="card-body text-center">
+              <h5 class="card-title">Festive</h5>
+              <a href="#" class="btn btn-sm btn-outline-gold rounded-pill">View Collection</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="250">
+          <div class="card category-card h-100">
+            <img src="https://images.unsplash.com/photo-1543087903-1ac2ec7aa8c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="card-img-top" alt="Wholesale Deals">
+            <div class="card-body text-center">
+              <h5 class="card-title">Wholesale Deals</h5>
+              <a href="#" class="btn btn-sm btn-outline-gold rounded-pill">View Deals</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS SECTION -->
+  <section id="products" class="py-5">
+    <div class="container">
+      <h2 class="text-center logo-font mb-4" data-aos="fade-down">Featured Products</h2>
+      <div class="text-center mb-4 filter-btns" data-aos="fade-up">
+        <button class="btn filter-btn active" data-filter="all">All</button>
+        <button class="btn filter-btn" data-filter="men">Men</button>
+        <button class="btn filter-btn" data-filter="women">Women</button>
+        <button class="btn filter-btn" data-filter="kids">Kids</button>
+      </div>
+      <div class="row g-4" id="product-grid">
+        <!-- Products will be loaded dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- WHOLESALE BANNER -->
+  <section id="wholesale" class="py-5 wholesale-banner text-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8" data-aos="fade-right">
+          <h3 class="logo-font display-5">Wholesale Benefits</h3>
+          <div class="row mt-4">
+            <div class="col-md-4 mb-3">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-box-open fa-3x text-gold me-3"></i>
+                <div>
+                  <h5>Min. Order</h5>
+                  <p class="mb-0">50 pcs</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-percent fa-3x text-gold me-3"></i>
+                <div>
+                  <h5>Bulk Discount</h5>
+                  <p class="mb-0">Up to 40%</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="d-flex align-items-center">
+                <i class="fas fa-truck fa-3x text-gold me-3"></i>
+                <div>
+                  <h5>Delivery</h5>
+                  <p class="mb-0">Pan India</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn-gold btn-lg rounded-pill mt-3 px-5"><i class="fas fa-phone-alt me-2"></i>Get Wholesale Price</a>
+        </div>
+        <div class="col-lg-4 text-center" data-aos="fade-left">
+          <i class="fas fa-handshake fa-7x text-gold"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center logo-font mb-5" data-aos="fade-down">Why Choose Us</h2>
+      <div class="row g-4">
+        <div class="col-md-3 col-6" data-aos="flip-left">
+          <div class="text-center p-4">
+            <div class="bg-gold rounded-circle d-inline-flex p-4 mb-3">
+              <i class="fas fa-tshirt fa-3x text-dark"></i>
+            </div>
+            <h5>Premium Quality</h5>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="flip-left" data-aos-delay="50">
+          <div class="text-center p-4">
+            <div class="bg-gold rounded-circle d-inline-flex p-4 mb-3">
+              <i class="fas fa-tags fa-3x text-dark"></i>
+            </div>
+            <h5>Affordable Price</h5>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="flip-left" data-aos-delay="100">
+          <div class="text-center p-4">
+            <div class="bg-gold rounded-circle d-inline-flex p-4 mb-3">
+              <i class="fas fa-rocket fa-3x text-dark"></i>
+            </div>
+            <h5>Fast Delivery</h5>
+          </div>
+        </div>
+        <div class="col-md-3 col-6" data-aos="flip-left" data-aos-delay="150">
+          <div class="text-center p-4">
+            <div class="bg-gold rounded-circle d-inline-flex p-4 mb-3">
+              <i class="fas fa-users fa-3x text-dark"></i>
+            </div>
+            <h5>Trusted by 1000+</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS CAROUSEL -->
+  <section id="testimonials" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center logo-font mb-4" data-aos="fade-down">Client Testimonials</h2>
+      <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="testimonial-card text-center mx-auto" style="max-width: 700px;">
+              <i class="fas fa-quote-left fa-3x text-gold mb-3"></i>
+              <p class="lead">"Excellent quality and timely delivery. Best wholesaler in town! The fabrics are premium and staff is very cooperative."</p>
+              <h5 class="mt-4">- Rajesh Mehta, Retailer</h5>
+              <div class="text-gold">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="testimonial-card text-center mx-auto" style="max-width: 700px;">
+              <i class="fas fa-quote-left fa-3x text-gold mb-3"></i>
+              <p class="lead">"I love their festive collection. Premium fabric and great fit. My customers are very happy with the bulk orders."</p>
+              <h5 class="mt-4">- Sneha Kapoor, Boutique Owner</h5>
+              <div class="text-gold">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="testimonial-card text-center mx-auto" style="max-width: 700px;">
+              <i class="fas fa-quote-left fa-3x text-gold mb-3"></i>
+              <p class="lead">"Bulk orders are seamless. Highly recommend for wholesale. Their winter collection is absolutely stunning!"</p>
+              <h5 class="mt-4">- Vikram Jain, Wholesale Buyer</h5>
+              <div class="text-gold">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="py-5">
+    <div class="container">
+      <h2 class="text-center logo-font mb-5" data-aos="fade-down">Get In Touch</h2>
+      <div class="row g-5">
+        <div class="col-md-6" data-aos="fade-up">
+          <form id="inquiryForm" class="bg-light p-4 rounded-4">
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Your Name" required>
+            </div>
+            <div class="mb-3">
+              <input type="tel" class="form-control" placeholder="Phone Number" required>
+            </div>
+            <div class="mb-3">
+              <select class="form-select">
+                <option selected disabled>Select Business Type</option>
+                <option>Retail Buyer</option>
+                <option>Wholesale Buyer</option>
+                <option>Distributor</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <textarea class="form-control" rows="4" placeholder="Your Message..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-gold w-100 py-3">Send Inquiry <i class="fas fa-paper-plane ms-2"></i></button>
+          </form>
+          <div class="mt-4 d-flex gap-3">
+            <a href="tel:+919876543210" class="btn btn-outline-dark flex-fill py-3"><i class="fas fa-phone-alt me-2"></i> Call Now</a>
+            <a href="#" class="btn btn-outline-success flex-fill py-3"><i class="fab fa-whatsapp me-2"></i> WhatsApp</a>
+          </div>
+        </div>
+        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="map-container mb-4">
+            <div class="map-overlay">
+              <div class="text-center">
+                <i class="fas fa-map-marked-alt fa-4x text-gold mb-3"></i>
+                <h4>Visit Our Store</h4>
+                <p>123 Fashion Street, Mumbai - 400001</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-light p-4 rounded-4">
+            <div class="d-flex align-items-center mb-3">
+              <i class="fas fa-clock text-gold fa-2x me-3"></i>
+              <div>
+                <h6 class="mb-1">Opening Hours</h6>
+                <p class="mb-0">Mon-Sat: 10:00 AM - 8:00 PM | Sun: Closed</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center">
+              <i class="fas fa-envelope text-gold fa-2x me-3"></i>
+              <div>
+                <h6 class="mb-1">Email Us</h6>
+                <p class="mb-0">contact@styleweave.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer text-white py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h4 class="logo-font mb-3"><i class="fas fa-tshirt text-gold me-2"></i>StyleWeave</h4>
+          <p>Premium garments for retail and wholesale since 2010. Quality you can trust.</p>
+        </div>
+        <div class="col-md-4">
+          <h5 class="mb-3">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="#home" class="text-white text-decoration-none">Home</a></li>
+            <li class="mb-2"><a href="#about" class="text-white text-decoration-none">About Us</a></li>
+            <li class="mb-2"><a href="#products" class="text-white text-decoration-none">Products</a></li>
+            <li class="mb-2"><a href="#wholesale" class="text-white text-decoration-none">Wholesale</a></li>
+            <li class="mb-2"><a href="#contact" class="text-white text-decoration-none">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5 class="mb-3">Connect With Us</h5>
+          <div class="mb-3">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          </div>
+          <p><i class="fas fa-phone-alt text-gold me-2"></i> +91 98765 43210</p>
+          <p><i class="fas fa-envelope text-gold me-2"></i> contact@styleweave.com</p>
+        </div>
+      </div>
+      <hr class="border-light mt-4">
+      <div class="text-center">
+        <p class="mb-0">&copy; 2025 StyleWeave. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Buttons -->
+  <a href="https://wa.me/919876543210" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <div class="scroll-top" id="scrollTop"><i class="fas fa-arrow-up"></i></div>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightboxModal" onclick="this.style.display='none'">
+    <span class="close-lightbox">&times;</span>
+    <img id="lightboxImage" src="" alt="Enlarged view">
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 50
+    });
+
+    // Preloader
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('fade-out');
+      }, 500);
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('mainNav');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll to Top Button
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 500) {
+        scrollTopBtn.classList.add('show');
+      } else {
+        scrollTopBtn.classList.remove('show');
+      }
+    });
+
+    scrollTopBtn.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Animated Counters
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+
+    const startCounters = () => {
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const updateCount = () => {
+          const current = +counter.innerText;
+          const increment = Math.ceil(target / 30);
+          
+          if (current < target) {
+            counter.innerText = current + increment;
+            setTimeout(updateCount, 40);
+          } else {
+            counter.innerText = target;
+          }
+        };
+        updateCount();
+      });
+    };
+
+    // Start counters when about section is in view
+    const aboutSection = document.getElementById('about');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          startCounters();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(aboutSection);
+
+    // Product Data with more items
+    const products = [
+      { name: 'Men\'s Premium Blazer', price: '₹3,299', img: 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400', category: 'men', wholesale: 'Min 10 pcs' },
+      { name: 'Designer Gown', price: '₹2,499', img: 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=400', category: 'women', wholesale: 'Min 8 pcs' },
+      { name: 'Kids Party Wear Set', price: '₹1,199', img: 'https://images.unsplash.com/photo-1522771930-78848d9293e8?w=400', category: 'kids', wholesale: 'Min 15 pcs' },
+      { name: 'Men\'s Kurta Set', price: '₹1,899', img: 'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400', category: 'men', wholesale: 'Min 12 pcs' },
+      { name: 'Women\'s Saree', price: '₹3,990', img: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400', category: 'women', wholesale: 'Min 6 pcs' },
+      { name: 'Kids Winter Jacket', price: '₹1,499', img: 'https://images.unsplash.com/photo-1601823984263-b87b59798b70?w=400', category: 'kids', wholesale: 'Min 10 pcs' },
+      { name: 'Men\'s Suit', price: '₹5,999', img: 'https://images.unsplash.com/photo-1593032465175-73ac5c1e67a9?w=400', category: 'men', wholesale: 'Min 5 pcs' },
+      { name: 'Women\'s Lehenga', price: '₹4,499', img: 'https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400', category: 'women', wholesale: 'Min 7 pcs' }
+    ];
+
+    function renderProducts(filter = 'all') {
+      const grid = document.getElementById('product-grid');
+      grid.innerHTML = ''; // Clear grid
+      
+      const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+      
+      filtered.forEach(product => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-3';
+        col.innerHTML = `
+          <div class="product-card">
+            <div class="product-image">
+              <img src="${product.img}" alt="${product.name}" class="lightbox-trigger">
+              <div class="product-overlay">
+                <button class="btn btn-gold rounded-pill">Quick View</button>
+              </div>
+              <span class="wholesale-badge">${product.wholesale}</span>
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title">${product.name}</h5>
+              <p class="price-tag mb-3">${product.price}</p>
+              <button class="btn btn-outline-gold w-100 rounded-pill">Enquire Now</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(col);
+      });
+
+      // Add lightbox functionality to new images
+      document.querySelectorAll('.lightbox-trigger').forEach(img => {
+        img.addEventListener('click', function() {
+          document.getElementById('lightboxImage').src = this.src;
+          document.getElementById('lightboxModal').style.display = 'flex';
+        });
+      });
+    }
+
+    // Initial render
+    renderProducts('all');
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderProducts(this.dataset.filter);
+      });
+    });
+
+    // Close lightbox
+    document.querySelector('.close-lightbox')?.addEventListener('click', function() {
+      document.getElementById('lightboxModal').style.display = 'none';
+    });
+
+    // Form submission (prevent default for demo)
+    document.getElementById('inquiryForm')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your inquiry! We will contact you soon.');
+      this.reset();
+    });
+
+    // Parallax effect on hero
+    window.addEventListener('scroll', function() {
+      const hero = document.querySelector('.hero');
+      const scrolled = window.scrollY;
+      hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+    });
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= (sectionTop - 200)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+          link.style.color = 'var(--gold) !important';
+        }
+      });
+    });
+
+    // Auto close mobile menu on link click
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        if (navbarCollapse.classList.contains('show')) {
+          navbarCollapse.classList.remove('show');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
